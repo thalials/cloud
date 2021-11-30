@@ -8,7 +8,6 @@ def initialize(region, resource, client, session, name_instance):
     try:
         # destroy instance
         destroy_instance(resource, client, name_instance)
-        # destroy_instance(ohio_resource, ohio_client, 'POSTGRES')
 
         # destroy images
         images = ec2.describe_images(Owners=['self'])
@@ -21,13 +20,17 @@ def initialize(region, resource, client, session, name_instance):
         # destroy load balancer
         destroy_load_balancer(session, region, LoadBalancerName)
 
-        # destroy launch config
-        destroy_launch_configuration(session, region, LaunchConfigurationNames)
-
         # destroy autoscalling
         destroy_autoscalling(session, region, AutoScalingGroupName)
 
-        print("sucess in initialization!\n")
+        # destroy target group 
+        load_balancer_client = boto3.client('elbv2', region_name=AWS_REGION_NAME_NV)
+        destroy_target_groups(LB_TARGET_GROUP_NAME, load_balancer_client)
+
+        # destroy launch config
+        destroy_launch_configuration(session, region, LaunchConfigurationNames)
+
+        print("---- {} sucess in initialization! ----\n".format(name_instance))
 
 
     except Exception as e:

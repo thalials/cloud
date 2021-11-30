@@ -21,8 +21,23 @@ AutoScalingGroupName = 'AUTOSCALLING_ORM'
 imageId_nv = 'ami-0279c3b3186e54acd'
 imageId_ohio = 'ami-020db2c14939a8efb'
 
-default_ohio = 'default_ohio'
-default_nv = 'default_nv'
+default_ohio = 'default_ohio4'
+default_nv = 'default_nv4'
+
+# loabalancer target group
+LB_TARGET_GROUP_NAME = 'load-balancer-target-group-v1'
+LB_PROTOCOL = 'HTTP'
+LB_HEALTH_CHECK_ENABLED = True
+LB_HEALTH_CHECK_PROTOCOL = 'HTTP'
+LB_HEALTH_CHECK_PORT = '8080'
+LB_HEALTH_CHECK_PATH = '/admin/'
+LB_PORT = 8080
+LB_TARGET_TYPE = 'instance'
+
+# listener 
+LT_PROTOCOL = 'HTTP'
+LT_PORT = 80
+LT_DEFAULT_ACTIONS_TYPE = 'forward'
 
 # CONFIGURING AWS
 ohio_s = boto3.session.Session(region_name=AWS_REGION_NAME_OHIO, 

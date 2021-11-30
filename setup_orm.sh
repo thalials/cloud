@@ -14,5 +14,4 @@ cd tasks
 ./install.sh    
 cd ..
 echo "4">>log.txt
-
 sudo reboot

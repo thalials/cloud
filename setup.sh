@@ -10,13 +10,13 @@ sudo apt install postgresql postgresql-contrib -y
 echo "2">>log.txt
 
 # cria usuario postgres e um db 
-sudo su - postgres
+sudo -u postgres psql -c "CREATE USER cloud WITH PASSWORD 'cloud';"
 echo "3">>log.txt
 
-echo "cloud" | createuser -s cloud -W
+sudo -u postgres createdb -O cloud tasks
 echo "4">>log.txt
 
-createdb -O cloud tasks
+sudo su - postgres
 
 # Remova o comentário e substitua a string da linha para aceitar conexões remotas:
 # listen_addresses = '*'
