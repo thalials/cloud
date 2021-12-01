@@ -21,8 +21,8 @@ AutoScalingGroupName = 'AUTOSCALLING_ORM'
 imageId_nv = 'ami-0279c3b3186e54acd'
 imageId_ohio = 'ami-020db2c14939a8efb'
 
-default_ohio = 'default_ohio4'
-default_nv = 'default_nv4'
+default_ohio = 'default_ohio'
+default_nv = 'default_nv'
 
 # loabalancer target group
 LB_TARGET_GROUP_NAME = 'load-balancer-target-group-v1'

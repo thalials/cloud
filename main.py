@@ -32,19 +32,12 @@ def main():
     load_balancer_client = boto3.client('elbv2', region_name=AWS_REGION_NAME_NV)
     load_balancer_waiter_available = load_balancer_client.get_waiter('load_balancer_available')
 
-    target_group = create_target_group(LB_TARGET_GROUP_NAME,LB_PROTOCOL,
-                                                LB_HEALTH_CHECK_ENABLED,
-                                                LB_HEALTH_CHECK_PROTOCOL,
-                                                LB_HEALTH_CHECK_PORT,
-                                                LB_HEALTH_CHECK_PATH,
-                                                LB_PORT,
-                                                LB_TARGET_TYPE,
-                                                north_virginia_client,
-                                                load_balancer_client)
+    target_group = create_target_group(LB_TARGET_GROUP_NAME, LB_PROTOCOL, LB_HEALTH_CHECK_ENABLED, LB_HEALTH_CHECK_PROTOCOL, LB_HEALTH_CHECK_PORT, LB_HEALTH_CHECK_PATH, LB_PORT, LB_TARGET_TYPE, north_virginia_client, load_balancer_client)
 
     # create loadbalancer
     response_lb, amazon_resource_name = create_load_balancer(north_virginia_client, load_balancer_client, LoadBalancerName, sg_id_nv, load_balancer_waiter_available)
     DNSName = response_lb['LoadBalancers'][0]['DNSName'] 
+    
     with open("DNSName.txt", "w") as file:
         file.write(DNSName)
 
